@@ -22,7 +22,7 @@ pipeline{
         stage('Pushing Docker file to DockerHub'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'Docker_Password', variable: 'docker')]){
+                    withCredentials([string(credentialsId: 'Docker_Password3', variable: 'docker')]){
                     sh 'docker login -u lucatestdevops -p ${docker}'
                     }
                     sh "docker push lucatestdevops/todo_app:latest"
