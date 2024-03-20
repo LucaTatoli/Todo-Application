@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment {
-        PROJECT_ID = "<Project ID>"
+        PROJECT_ID = "student-00456"
         CLUSTER_NAME = "public-cluster"
         LOCATION = "us-central1-a"
         CREDENTIALS_ID = 'Credentials'
@@ -9,13 +9,13 @@ pipeline{
     stages{
         stage('Checkout from GitHub') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '<GitHub URL>']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/LucaTatoli/Todo-Application']])
             }
         }
         stage('Building Docker file'){
             steps {
                 script{
-                    sh "docker build -t <Docker Username>/todo_app:latest ."
+                    sh "docker build -t student00456/todo_app:latest ."
                 }
             }
         }
@@ -23,9 +23,9 @@ pipeline{
             steps{
                 script{
                     withCredentials([string(credentialsId: 'Docker_Password', variable: 'docker')]){
-                    sh 'docker login -u <Docker Username> -p latest'
+                    sh 'docker login -u student00456 -p latest'
                     }
-                    sh "docker push <Docker Username>/todo_app:latest"
+                    sh "docker push student00456/todo_app:latest"
                 }
             }
         }
