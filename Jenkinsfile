@@ -15,7 +15,7 @@ pipeline{
         stage('Building Docker file'){
             steps {
                 script{
-                    sh "docker build -t luca.tatoli.sec@gmail.com/todo_app:latest ."
+                    sh "docker build -t lucatestdevops/todo_app:latest ."
                 }
             }
         }
@@ -23,9 +23,9 @@ pipeline{
             steps{
                 script{
                     withCredentials([string(credentialsId: 'Docker_Password', variable: 'docker')]){
-                    sh 'docker login -u luca.tatoli.sec@gmail.com -p ${docker}'
+                    sh 'docker login -u lucatestdevops -p ${docker}'
                     }
-                    sh "docker push luca.tatoli.sec@gmail.com/todo_app:latest"
+                    sh "docker push lucatestdevops/todo_app:latest"
                 }
             }
         }
